@@ -11,11 +11,11 @@ npm install react-native-dns-lookup-windows
 ## Usage
 
 ```js
-import DnsLookupWindows from "react-native-dns-lookup-windows";
+import DnsLookupWindows from "react-native-windows-dns-lookup";
 
 // ...
 
-const result = await DnsLookupWindows.multiply(3, 7);
+const result = await DnsLookupWindows.query("www.google.com", QueryType.A);
 ```
 
 ## Contributing
