@@ -1,6 +1,6 @@
 {
   "name": "@emmanuj/react-native-windows-dns-lookup",
-  "version": "0.1.0",
+  "version": "0.1.0-0",
   "description": "DNS Lookup in react native windows",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
