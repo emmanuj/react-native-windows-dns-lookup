@@ -86,9 +86,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/emmanuj"
-  },
   "release-it": {
     "git": {
       "commitMessage": "chore: release ${version}",
