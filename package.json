@@ -31,7 +31,10 @@
     "ios",
     "android"
   ],
-  "repository": "https://www.github.com/emmanuj/react-native-windows-dns-lookup",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/emmanuj/react-native-windows-dns-lookup"
+  },
   "author": "emmanuel.john <emmanuel.john@singlewire.com> (https://www.github.com/emmanuj)",
   "license": "MIT",
   "bugs": {
