@@ -10,7 +10,6 @@
   "files": [
     "src",
     "lib",
-    "windows",
     "android",
     "windows",
     "ios",
