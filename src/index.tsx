@@ -1,7 +1,8 @@
 import { NativeModules } from 'react-native';
+import { useEffect, useState } from 'react';
 
 export type DnsClientType = {
-  init: (options: DnsClientOptions) => Promise<void>;
+  init: (options?: DnsClientOptions) => Promise<void>;
   query: (domainName: string, queryType: QueryType) => Promise<any>;
 };
 
@@ -119,6 +120,29 @@ export enum QueryType {
 export type DnsClientOptions = Record<string, unknown> & {
   IPAddresses?: string[] | null;
   IPEndpoints?: Array<{ Port: number; IPAddress: string }> | null;
+};
+
+export const useDnsQuery = (opt?: DnsClientOptions) => {
+  const [isReady, setIsReady] = useState(false);
+  const [isInitError, setInitError] = useState(false);
+
+  useEffect(() => {
+    const init = async () => {
+      setIsReady(false);
+      setInitError(false);
+      try {
+        await DnsClient.init(opt);
+      } catch (error) {
+        console.log(error);
+        setInitError(true);
+      }
+
+      setIsReady(true);
+    };
+    init();
+  }, [opt]);
+
+  return [isReady, isInitError, DnsClient.query];
 };
 
 const DnsClient = NativeModules.RNDnsClientModule as DnsClientType;

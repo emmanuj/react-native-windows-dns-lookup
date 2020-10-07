@@ -50,29 +50,32 @@ namespace RNDnsLookup
       await Task.Run(() =>
       {
         LookupClientOptions lookupClientOptions = new LookupClientOptions();
-        if (options.IPAddresses != null)
+        if(options != null)
         {
-          var ipAddresses = options.IPAddresses.Select(addr =>
+          if (options.IPAddresses != null)
           {
-            IPAddress.TryParse(addr, out IPAddress address);
-            return address;
-          }).ToArray();
+            var ipAddresses = options.IPAddresses.Select(addr =>
+            {
+              IPAddress.TryParse(addr, out IPAddress address);
+              return address;
+            }).ToArray();
 
-          lookupClientOptions = new LookupClientOptions(ipAddresses);
-        }
-        else if (options.IPEndpoints != null)
-        {
-          var ipEndPoints = options.IPEndpoints.Select(namesvr =>
+            lookupClientOptions = new LookupClientOptions(ipAddresses);
+          }
+          else if (options.IPEndpoints != null)
           {
-            IPAddress.TryParse(namesvr.IPAddress, out IPAddress address);
-            var endpoint = new IPEndPoint(address, namesvr.Port);
-            return endpoint;
-          }).ToArray();
+            var ipEndPoints = options.IPEndpoints.Select(namesvr =>
+            {
+              IPAddress.TryParse(namesvr.IPAddress, out IPAddress address);
+              var endpoint = new IPEndPoint(address, namesvr.Port);
+              return endpoint;
+            }).ToArray();
 
-          lookupClientOptions = new LookupClientOptions(ipEndPoints);
+            lookupClientOptions = new LookupClientOptions(ipEndPoints);
+          }
+          lookupClientOptions.UseCache = options.UseCache;
+          lookupClientOptions.Retries = options.Retries;
         }
-        lookupClientOptions.UseCache = options.UseCache;
-        lookupClientOptions.Retries = options.Retries;
         LookupClient = new LookupClient(lookupClientOptions);
         promise.Resolve(true);
       });

@@ -11,6 +11,7 @@
     "src",
     "lib",
     "android",
+    "windows",
     "ios",
     "cpp",
     "react-native-dns-lookup-windows.podspec",
