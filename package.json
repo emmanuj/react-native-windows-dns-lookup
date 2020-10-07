@@ -1,6 +1,6 @@
 {
   "name": "react-native-windows-dns-lookup",
-  "version": "0.1.0",
+  "version": "0.1.0-1",
   "description": "DNS Lookup in react native windows",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -10,6 +10,7 @@
   "files": [
     "src",
     "lib",
+    "windows",
     "android",
     "windows",
     "ios",
@@ -30,9 +31,14 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "dns lookup",
+    "windows"
   ],
-  "repository": "https://www.github.com/emmanuj/react-native-windows-dns-lookup",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emmanuj/react-native-windows-dns-lookup"
+  },
   "author": "emmanuel.john <emmanuel.john@singlewire.com> (https://www.github.com/emmanuj)",
   "license": "MIT",
   "bugs": {
