@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace RNDnsLookupModule
+namespace RNDnsLookup
 {
   class NameServerEndpoint
   {
@@ -45,34 +45,37 @@ namespace RNDnsLookupModule
      * Used on the client to initialize the DNS Lookup Client witt options.
      */
     [ReactMethod("init")]
-    public async void Init(DnsClientOptions options, ReactPromise<JSValue> promise)
+    public async Task Init(DnsClientOptions options, ReactPromise<JSValue> promise)
     {
-      LookupClientOptions lookupClientOptions = new LookupClientOptions();
-      if (options.IPAddresses != null)
+      await Task.Run(() =>
       {
-        var ipAddresses = options.IPAddresses.Select(addr =>
+        LookupClientOptions lookupClientOptions = new LookupClientOptions();
+        if (options.IPAddresses != null)
         {
-          IPAddress.TryParse(addr, out IPAddress address);
-          return address;
-        }).ToArray();
-        
-        lookupClientOptions = new LookupClientOptions(ipAddresses);
-      }
-      else if (options.IPEndpoints != null)
-      {
-        var ipEndPoints = options.IPEndpoints.Select(namesvr =>
-        {
-          IPAddress.TryParse(namesvr.IPAddress, out IPAddress address);
-          var endpoint = new IPEndPoint(address, namesvr.Port);
-          return endpoint;
-        }).ToArray();
+          var ipAddresses = options.IPAddresses.Select(addr =>
+          {
+            IPAddress.TryParse(addr, out IPAddress address);
+            return address;
+          }).ToArray();
 
-        lookupClientOptions = new LookupClientOptions(ipEndPoints);
-      }
-      lookupClientOptions.UseCache = options.UseCache;
-      lookupClientOptions.Retries = options.Retries;
-      LookupClient = new LookupClient(lookupClientOptions);
-      promise.Resolve(true);
+          lookupClientOptions = new LookupClientOptions(ipAddresses);
+        }
+        else if (options.IPEndpoints != null)
+        {
+          var ipEndPoints = options.IPEndpoints.Select(namesvr =>
+          {
+            IPAddress.TryParse(namesvr.IPAddress, out IPAddress address);
+            var endpoint = new IPEndPoint(address, namesvr.Port);
+            return endpoint;
+          }).ToArray();
+
+          lookupClientOptions = new LookupClientOptions(ipEndPoints);
+        }
+        lookupClientOptions.UseCache = options.UseCache;
+        lookupClientOptions.Retries = options.Retries;
+        LookupClient = new LookupClient(lookupClientOptions);
+        promise.Resolve(true);
+      });
     }
 
     [ReactMethod("query")]
