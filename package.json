@@ -10,6 +10,7 @@
   "files": [
     "src",
     "lib",
+    "windows",
     "android",
     "ios",
     "cpp",
@@ -29,7 +30,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "dns lookup",
+    "windows"
   ],
   "repository": {
     "type": "git",
