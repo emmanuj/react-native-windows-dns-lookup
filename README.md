@@ -14,7 +14,7 @@ npm install react-native-windows-dns-lookup
 import DnsLookupWindows from "react-native-windows-dns-lookup";
 
 // ...
-DnsLookupWindows.init(); // or DnsLookupWindows.init({IPAddresses: addresses});
+await DnsLookupWindows.init(); // or DnsLookupWindows.init({IPAddresses: addresses});
 const result = await DnsLookupWindows.query("www.google.com", QueryType.A);
 ```
 
